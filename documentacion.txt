@@ -1,0 +1,5 @@
+http://www.goldsborough.me/c/c++/linker/2016/03/30/19-34-25-internal_and_external_linkage_in_c++/
+
+https://stackoverflow.com/questions/18271363/line-by-line-c-c-code-debugging-in-linux-ubuntu
+
+https://www.codeproject.com/Questions/1179465/What-is-the-difference-between-object-file-and-the
