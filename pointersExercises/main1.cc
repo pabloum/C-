@@ -56,12 +56,21 @@ int main(){
   //
   // Given the string "A string." Print on one line the letter on the index 0, the pointer position and the letter t. undate the pointer to pointer +2. Then, in another line print the pointer and the letters r and g of the string (using the pointer).
 
-  char msn[] = "A string.";
-  char* pmsn = msn;
+  // char msn[] = "A string.";
+  // char* pmsn = msn;
+  //
+  // std::cout << *(pmsn) << " - " << *pmsn << " - " << *(pmsn+3) << '\n';
+  // pmsn += 2;
+  // cout << *pmsn << " - " << *(pmsn+2) << " - " << *(pmsn+5) << endl;
 
-  std::cout << *(pmsn) << " - " << *pmsn << " - " << *(pmsn+3) << '\n';
-  pmsn += 2;
-  cout << *pmsn << " - " << *(pmsn+2) << " - " << *(pmsn+5) << endl;
+  int aa = 127;
+  int cc = 1010;
+  int bb = 323;
+
+  int* paa = &aa;
+
+  std::cout << "This is bb: " << *(paa+2) << '\n';
+
 
   return 0;
 }
