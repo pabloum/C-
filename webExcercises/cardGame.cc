@@ -4,6 +4,12 @@
 #include <array>
 using namespace std;
 
+void stop(){
+  char stp;
+  fflush(stdin);
+  scanf("%c",&stp);;
+}
+
 /*Let’s pretend we’re writing a card game.
 
 6a) A deck of cards has 52 unique cards (13 card ranks of 4 suits). Create enumerations for the card ranks (2, 3, 4, 5, 6, 7, 8, 9, 10, Jack, Queen, King, Ace) and suits (clubs, diamonds, hearts, spades).
@@ -144,12 +150,94 @@ Create a function named playBlackjack() that returns true if the player wins, an
 * Accept a shuffled deck of cards as a parameter.
 * Initialize a pointer to the first Card named cardPtr. This will be used to deal out cards from the deck (see the hint below).
 * Create two integers to hold the player’s and dealer’s total score so far.
-* Implement Blackjack as defined above.
+* Implement Blackjack as defined below.
 
 Hint: The easiest way to deal cards from the deck is to keep a pointer to the next card in the deck that will be dealt out. Whenever we need to deal a card, we get the value of the current card, and then advance the pointer to point at the next card. This can be done in one operation:
-*/
-bool playBlackjack(){
+getCardValue(*cardPtr++);
 
+This returns the current card’s value (which can then be added to the player or dealer’s total), and advances cardPtr to the next card.
+
+Also write a main() function that plays a single game of Blackjack.
+
+## RULES
+
+Here are the rules for our version of Blackjack:
+* The dealer gets one card to start (in real life, the dealer gets two, but one is face down so it doesn’t matter at this point).
+* The player gets two cards to start.
+* The player goes first.
+* A player can repeatedly “hit” or “stand”.
+* If the player “stands”, their turn is over, and their score is calculated based on the cards they have been dealt.
+* If the player “hits”, they get another card and the value of that card is added to their total score.
+* An ace normally counts as a 1 or an 11 (whichever is better for the total score). For simplicity, we’ll count it as an 11 here.
+* If the player goes over a score of 21, they bust and lose immediately.
+* The dealer goes after the player.
+* The dealer repeatedly draws until they reach a score of 17 or more, at which point they stand.
+* If the dealer goes over a score of 21, they bust and the player wins immediately.
+* Otherwise, if the player has a higher score than the dealer, the player wins. Otherwise, the player loses (we’ll consider ties as dealer wins for simplicity).
+*/
+bool playBlackjack(array <Card,52> deck){
+  Card* cardPtr = &deck[0];
+  int playerScore = 0, dealerScore = 0, cardValue;
+
+  cout << "The deck has been shuffled." << endl;
+  stop();
+
+  cout << "The dealer will get a card" << endl;
+  stop();
+
+  dealerScore = getCardValue(*cardPtr++);
+
+  cout << "The dealer got " << dealerScore << " points" << endl;
+  stop();
+
+  cout << "Now, you will get two cards" << endl;
+  stop();
+  for (size_t i = 0; i < 2; i++) {
+    cardValue = getCardValue(*cardPtr++);
+    playerScore += cardValue;
+    cout << "\tYou got " << cardValue << " points";
+    stop();
+  }
+  cout << endl << "Your total score now is: " << playerScore << endl;
+  stop();
+
+  char hint;
+  do{
+    do{
+      cout << "Do you want to hint or stand? (h/s): "; cin >> hint;
+      if (hint != 'h' && hint != 's')
+        cout << "Invalid option" << endl;
+    }while (hint != 'h' && hint != 's');
+    if (hint == 's')
+      break;
+    cardValue = getCardValue(*cardPtr++);
+    playerScore += cardValue;
+    cout << "\tYou got " << cardValue << " points"<< endl;
+    cout << "\tYour total score now is: " << playerScore << endl << endl;
+    if (playerScore > 21){
+      return false;
+    } else if (playerScore == 21){
+      return true;
+    }
+  }while (hint == 'h');
+
+  stop();
+  do{
+    cardValue = getCardValue(*cardPtr++);
+    dealerScore += cardValue;
+    cout << "\tThe dealer got " << cardValue << " points"<< endl;
+    cout << "\tThe total dealer's score now is: " << dealerScore << endl;
+
+    stop();
+  }while(dealerScore<=17);
+
+  if (dealerScore > 21) {
+    return true;
+  } else if (dealerScore >= playerScore){
+    return false;
+  }
+
+  return true;
 }
 
 int main(int argc, char const *argv[]) {
@@ -171,11 +259,12 @@ Hint: Use static_cast if you need to convert an integer into an enumerated type.
   }
 
   shuffleDeck(deck);
-  printDeck(deck);
 
-  win = playBlackjack();
-  if (win == true) {
-    cout << "The player wins !! CONGRATULATIONS !!";
+  cout << "\tLet's play Blackjack. \n " << endl;
+
+  bool winner = playBlackjack(deck);
+  if (winner == true) {
+    cout << "The player wins !! CONGRATULATIONS !!" << endl;
   } else {
     cout << "The player loses. The dealer gets it all." << endl;
   }
