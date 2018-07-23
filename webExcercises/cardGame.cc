@@ -185,17 +185,21 @@ bool playBlackjack(array <Card,52> deck){
   cout << "The dealer will get a card" << endl;
   stop();
 
-  dealerScore = getCardValue(*cardPtr++);
+  dealerScore = getCardValue(*cardPtr);
 
-  cout << "The dealer got " << dealerScore << " points" << endl;
+  cout << "The dealer got ";
+  printCard(*cardPtr++);
+  cout << ". So, the dealer has " << dealerScore << " points." << endl;
   stop();
 
   cout << "Now, you will get two cards" << endl;
   stop();
   for (size_t i = 0; i < 2; i++) {
-    cardValue = getCardValue(*cardPtr++);
+    cardValue = getCardValue(*cardPtr);
     playerScore += cardValue;
-    cout << "\tYou got " << cardValue << " points";
+    cout << "\tYou got ";
+    printCard(*cardPtr++);
+    cout << ". That means that you earned " << cardValue << " points.";
     stop();
   }
   cout << endl << "Your total score now is: " << playerScore << endl;
@@ -210,9 +214,11 @@ bool playBlackjack(array <Card,52> deck){
     }while (hint != 'h' && hint != 's');
     if (hint == 's')
       break;
-    cardValue = getCardValue(*cardPtr++);
+    cardValue = getCardValue(*cardPtr);
     playerScore += cardValue;
-    cout << "\tYou got " << cardValue << " points"<< endl;
+    cout << "\tYou got ";
+    printCard(*cardPtr++);
+    cout << ". That means that you earned " << cardValue << " points." << endl;
     cout << "\tYour total score now is: " << playerScore << endl << endl;
     if (playerScore > 21){
       return false;
