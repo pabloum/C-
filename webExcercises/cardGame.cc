@@ -229,10 +229,12 @@ bool playBlackjack(array <Card,52> deck){
 
   stop();
   do{
-    cardValue = getCardValue(*cardPtr++);
+    cardValue = getCardValue(*cardPtr);
     dealerScore += cardValue;
-    cout << "\tThe dealer got " << cardValue << " points"<< endl;
-    cout << "\tThe total dealer's score now is: " << dealerScore << endl;
+    cout << endl << "\tThe dealer got ";
+    printCard(*cardPtr);
+    cout << ". That means that he earned " << cardValue << " points." << endl;
+    cout << "\tThe total score of the dealer  now is: " << dealerScore << endl;
 
     stop();
   }while(dealerScore<=17);
