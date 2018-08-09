@@ -1,9 +1,9 @@
 #include <iostream>
 using namespace std;
 
-public:
 class Foo{
 
+public:
     size_t getValue(){
       return value;
     }

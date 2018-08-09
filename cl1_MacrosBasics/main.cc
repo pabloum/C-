@@ -1,7 +1,7 @@
 
 #include<iostream>
 #include "sum.h"
-// #include "sum.h"
+// #include "sum.cc"
 #include <string> // Librería con varios métodos útiles.
 
 #define DEBUG 1 // esto es una macro
@@ -20,7 +20,7 @@ int main(){
   std::cout << x << '\n';*/
   int i;
   FOR(i,10){
-    std::cout << "Hola mundo" << '\n';
+    std::cout << "Hola mundo " << sum(98,2) << '\n';
   }
 
   // std::cout << "EL resultado es: " << sum(5,4) << '\n';
