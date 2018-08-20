@@ -14,9 +14,9 @@ public:
   void foox();
 };
 
-void B::foox(){
-    std::cout << "B" << '\n';
-}
+  void B::foox(){
+      std::cout << "B" << '\n';
+  }
 
 int main(int argc, char const *argv[]) {
   A a;

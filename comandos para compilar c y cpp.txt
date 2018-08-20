@@ -1,0 +1,5 @@
+g++ -o test hipotenusa.cpp  // compila el código en c++
+./test                      // ejecuta el programa
+
+gcc -o test first.c         // compila el códgio en c
+./test                      // ejecuta el programa
