@@ -14,6 +14,7 @@ vectores
   .erase
 
 */
+// YOU CAN'T PUT IN THE HOURS UNLESS YOU LOVE IT
 
 #include <iostream>
 #include <bits/stdc++.h>
