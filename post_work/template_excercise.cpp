@@ -15,6 +15,20 @@ public:
     }
   }
 
+  void insert(T num) {
+    // arr[size++] = num;
+    T* storage = new T [++size];
+    for (size_t i = 0; i < size; i++) {
+      if (i == size - 1) {
+        storage[i] = num;
+      } else {
+        storage[i] = arr[i];
+      }
+    }
+    delete [] arr;
+    arr = storage;
+  }
+
   T at(int i) {
     return arr[i];
   }
@@ -26,11 +40,9 @@ public:
   void printArray () {
     std::cout << "array = { ";
     for (size_t i = 0; i < size; i++) {
-      if (i == size - 1) {
-        std::cout << arr[i];
-      } else {
-        std::cout << arr[i] << ", ";
-      }
+      std::cout << arr[i];
+      if (i < size - 1)
+        std::cout << ", ";
     }
     std::cout << "} " << '\n';
   }
@@ -46,7 +58,10 @@ int main(int argc, char const *argv[]) {
   vero.edit(3, 4);
   vero.edit(4, 5);
 
+  vero.insert(6);
+
   vero.printArray();
+
 
   return 0;
 }
@@ -54,7 +69,6 @@ int main(int argc, char const *argv[]) {
 /*
 (1) Implementar un template llamado StaticArray que tome como el tipo de dato del arreglo y su size.
 Los métodos que tendrá son:
-• insert() que inserta un elemento en la próxima posición disponible
 • delete() que borra el ultimo elemento
 • reverse() que revierte el contenido del arreglo
 • totalSize() devuelve la cantidad de elementos
@@ -62,6 +76,8 @@ Los métodos que tendrá son:
 • swap() que toma dos índices e intercambia los valores de los elementos en dichos índices
 • Especializar parcialmente el template, donde la cantidad de elementos es 1000
 • Especializar totalmente el template, donde el tipo es float y la cantidad de elementos es 1000
+
+• ** insert() que inserta un elemento en la próxima posición disponible
 • ** getElement() que toma el índice del elemento y devuelve el elemento en ese índice
 • ** print() imprime su contenido
 Todo el manejo de errores y chequeo de precondiciones tiene que ser realizado por su clase, no por el usuario de la misma.
