@@ -20,7 +20,7 @@ int main(){
   std::cout << x << '\n';*/
   int i;
   FOR(i,10){
-    std::cout << "Hola mundo " << sum(98,2) << '\n';
+    std::cout << i << ". Hola mundo " << sum(98,2) << '\n';
   }
 
   // std::cout << "EL resultado es: " << sum(5,4) << '\n';
